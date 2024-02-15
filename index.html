@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>uhv</title>
+</head>
+<body>
+    <pre>
+(1)import random
+
+compno = random.randint(1,10)
+while True :
+  guessno = int(input('enter your guess number'))
+  if guessno == compno:
+    print('your guess number is right congrats you won')
+    break
+  elif guessno > compno:
+    print('your guess number is greater than computer generated number choose a lower guess')
+  else:
+    print('your guess number is lower than computer generated number guess a higher number')
+
+__________________________________________________________________________________________________________
+(2)list1 =[]
+list2 =[]
+
+def readelements(list):
+  count  = int(input('enter the value'))
+  for i in range(count):
+    val = int(input('entewr the elemenbts'))
+    list.append(val)
+  
+
+
+readelements(list1)
+readelements(list2)
+
+def symmetric(list):
+  evencount =0
+  oddcount =0
+  for i in list:
+    if i%2==0:
+      evencount +=1
+    else:
+      oddcount+=1
+  return evencount,oddcount
+
+evenlist1=0
+evenlist2 =0
+oddlist1 =0
+oddlist2 =0
+
+evenlist1,oddlist1 =symmetric(list1)
+evenlist2,oddlist2 = symmetric(list2)
+
+if(evenlist1==evenlist2&oddlist1==oddlist2):
+  print('lists are symmetric')
+else:
+  print('list are unsymmetric')
+
+
+__________________________________________________________________________________________________________
+(3)def fib(n):
+  fibi = [0,1]
+  for i in range(n):
+    nextval = fibi[-1]+fibi[-2]
+    fibi.append(nextval)
+  return fibi[:n]\
+
+n = int(input("enter the number"))
+print('fibanassci series is', fib(n))
+__________________________________________________________________________________________________________
+(4)stud = {'john':86.5,'jack':91.2,'jill':84.5,'harry':72,'joe':80.5}
+
+total = sum(stud.values())
+print('total marks of all students is',total)
+average = total / len(stud)
+print('average is',average)
+
+sortedlist = sorted(stud,key = stud.get,reverse=True)
+
+count =0
+for i in sortedlist:
+  print('top scorer' ,i , ': ', stud[i])
+  if(count==2):
+    break
+  count +=1
+__________________________________________________________________________________________________________
+(5)str = input('enter the string')
+count =0
+
+for i in range(len(str)):
+  if str[i].isupper():
+    count = count+1
+    print(' the capital letter ',str[i] ,' is present at ',i+1,' position ')
+
+print('total number of capital letters is ', count)
+__________________________________________________________________________________________________________
+(6)str = input('enter a string')
+
+str = str.lower();
+acount = str.count('a')
+ecount = str.count('e')
+icount = str.count('i')
+ocount = str.count('o')
+ucount = str.count('u')
+
+print('number of a in the string :',acount)
+print('number of e in the string :',ecount)
+print('number of i in the string :',icount)
+print('number of o in the string :',ocount)
+print('number of u in the string :',ucount)
+__________________________________________________________________________________________________________
+(7)inpstr = input('enter the string')
+pattern  ='’!()-[]{};:’’’,\,<>,/,?,@,#,$,%^&*_~'
+output =''
+
+for i in inpstr:
+  if i  not in   pattern:
+    output = output + i
+
+
+print(output)
+__________________________________________________________________________________________________________
+(8)str1 = input('enter the string1')
+str2 = input('enter string 2')
+stri =''
+strj =''
+
+for i in str1:
+  if i.isupper():
+    stri = stri + i
+
+
+for i in str2:
+  if i.isupper():
+    strj = strj + i
+
+
+print('output is', stri+strj)
+__________________________________________________________________________________________________________
+
+(9)list =[]
+
+def readelements(list):
+  count = int(input('enter the number of elements you want to insert'))
+  for i in range(count):
+    val = int(input('enter the element '))
+    list.append(val)
+
+readelements(list)
+
+def binarsearch(list,n):
+  list.sort()
+  low =0
+  high = len(list)-1
+  mid =0
+
+  while low<=high:
+    mid = (low+high)//2
+
+    if list[mid]<n:
+      low = mid +1
+    elif list[mid]>n:
+      high = mid-1
+    else:
+      return mid
+  return -1
+
+key = int(input('enter the key u want to search'))
+result = binarsearch(list,key)  
+
+if result == -1:
+  print('key not found')
+else:
+  print('key is found in the position',result)
+
+__________________________________________________________________________________________________________
+
+(10)list =[]
+def readele(list):
+  count = int(input('enter the size of list '))
+  for i in range(count):
+    val = int(input('enter the element into the list '))
+    list.append(val)
+
+readele(list)
+
+def indexofsmallestelement(list):
+  mini = min(list)
+  index = list.index(mini)
+  print('minimum element is',mini)
+  print('position of minimum ele is',index)
+
+
+indexofsmallestelement(list)
+__________________________________________________________________________________________________________
+
+(11)myfile = open('sample.txt','r')
+linecount =0
+charcount =0
+count =0
+
+for i in myfile:
+  linecount = linecount+1
+  charcount += len(i)
+  wordcount = i.split()
+  count += len(wordcount)
+
+print('number of lines is', linecount)
+print('number of characters is',charcount)
+print('word is ',count)
+__________________________________________________________________________________________________________
+12>>
+filename = input('Enter the filename: ')
+file = open(filename, 'r')
+count = 1
+
+for line in file:
+    llist = line.split()
+    total = 0  
+    for mark in llist:
+        total += int(mark)
+    average = total / len(llist)
+
+    print('Total marks of student', count, 'is', total)
+    print('Average of', count, 'is', average)
+
+    count += 1  
+__________________________________________________________________________________________________________
+
+
+__________________________________________________________________________________________________________
+
+
+
+</pre>
+</body>
+</html>
