@@ -1,74 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>uhv</title>
+    <title>Hebbavu</title>
 </head>
 <body>
     <pre>
-(1)import random
 
-compno = random.randint(1,10)
-while True :
-  guessno = int(input('enter your guess number'))
-  if guessno == compno:
-    print('your guess number is right congrats you won')
-    break
-  elif guessno > compno:
-    print('your guess number is greater than computer generated number choose a lower guess')
-  else:
-    print('your guess number is lower than computer generated number guess a higher number')
-
-__________________________________________________________________________________________________________
-(2)list1 =[]
-list2 =[]
-
-def readelements(list):
-  count  = int(input('enter the value'))
-  for i in range(count):
-    val = int(input('entewr the elemenbts'))
-    list.append(val)
-  
-
-
-readelements(list1)
-readelements(list2)
-
-def symmetric(list):
-  evencount =0
-  oddcount =0
-  for i in list:
-    if i%2==0:
-      evencount +=1
+(1) import random
+rno=random.randint(1, 10)
+while True:
+    guessno=int(input("ENTER GUESSS NO:"))
+    if guessno==rno:
+        print("congooo!!")
+        break
+    elif guessno>rno:
+       print('your guess number is greater than computer generated number choose a lower guess')
     else:
-      oddcount+=1
-  return evencount,oddcount
+       print('your guess number is lower than computer generated number guess a higher number')
+print("game over")
 
-evenlist1=0
-evenlist2 =0
-oddlist1 =0
-oddlist2 =0
+__________________________________________________________________________________________________________
+(2)
+lst1=[]
+lst2=[]
+def read(list):
+    n=int(input("size:"))
+    for i in range(n):
+        value=int(input("enter value:"))
+        list.append(value)
+read(lst1)
+read(lst2)
 
-evenlist1,oddlist1 =symmetric(list1)
-evenlist2,oddlist2 = symmetric(list2)
+def symmetry(list):
+       ec=0
+       oc=0
+       for i in list:
+           if i%2==0:
+               ec+=1
+           else:
+               oc+=1
+       return ec,oc
+e1,o1=symmetry(lst1)
+e2,o2=symmetry(lst2)
 
-if(evenlist1==evenlist2&oddlist1==oddlist2):
-  print('lists are symmetric')
+if (e1==e2 and o1==o2):
+    print("symm")
 else:
-  print('list are unsymmetric')
-
+    print("not symm")
+                   
 
 __________________________________________________________________________________________________________
-(3)def fib(n):
-  fibi = [0,1]
-  for i in range(n):
-    nextval = fibi[-1]+fibi[-2]
-    fibi.append(nextval)
-  return fibi[:n]\
+(3)
+def fib(n):
+    fibi=[0,1]
+    for i in range(n):
+        nextval=fibi[-1]+fibi[-2]
+        fibi.append(nextval)
+    return fibi[:n]
 
-n = int(input("enter the number"))
-print('fibanassci series is', fib(n))
+
+n=int(input("SIZE:"))
+print("fib series:",fib(n))
 __________________________________________________________________________________________________________
-(4)stud = {'john':86.5,'jack':91.2,'jill':84.5,'harry':72,'joe':80.5}
+(4)
+stud = {'john':86.5,'jack':91.2,'jill':84.5,'harry':72,'joe':80.5}
 
 total = sum(stud.values())
 print('total marks of all students is',total)
@@ -84,17 +79,17 @@ for i in sortedlist:
     break
   count +=1
 __________________________________________________________________________________________________________
-(5)str = input('enter the string')
-count =0
-
+(5)
+str=input("ENTER STRING:")
+c=0
 for i in range(len(str)):
-  if str[i].isupper():
-    count = count+1
-    print(' the capital letter ',str[i] ,' is present at ',i+1,' position ')
-
-print('total number of capital letters is ', count)
+    if str[i].isupper():
+        c+=1
+        print("cap letter",str[i],"is at position",i+1)
+print("CAP COUNT:",c)
 __________________________________________________________________________________________________________
-(6)str = input('enter a string')
+(6)
+str = input('enter a string')
 
 str = str.lower();
 acount = str.count('a')
@@ -109,18 +104,18 @@ print('number of i in the string :',icount)
 print('number of o in the string :',ocount)
 print('number of u in the string :',ucount)
 __________________________________________________________________________________________________________
-(7)inpstr = input('enter the string')
+(7)
+str=input("enetr str:")
 pattern  ='’!()-[]{};:’’’,\,<>,/,?,@,#,$,%^&*_~'
-output =''
+op=''
 
-for i in inpstr:
-  if i  not in   pattern:
-    output = output + i
-
-
-print(output)
-__________________________________________________________________________________________________________
-(8)str1 = input('enter the string1')
+for i in str:
+    if i not in pattern:
+        op=op+i
+print(op)
+__________________________________________________________________________________________
+(8)
+str1 = input('enter the string1')
 str2 = input('enter string 2')
 stri =''
 strj =''
@@ -138,44 +133,39 @@ for i in str2:
 print('output is', stri+strj)
 __________________________________________________________________________________________________________
 
-(9)list =[]
-
-def readelements(list):
-  count = int(input('enter the number of elements you want to insert'))
-  for i in range(count):
-    val = int(input('enter the element '))
-    list.append(val)
-
-readelements(list)
-
-def binarsearch(list,n):
-  list.sort()
-  low =0
-  high = len(list)-1
-  mid =0
-
-  while low<=high:
-    mid = (low+high)//2
-
-    if list[mid]<n:
-      low = mid +1
-    elif list[mid]>n:
-      high = mid-1
-    else:
-      return mid
-  return -1
-
-key = int(input('enter the key u want to search'))
-result = binarsearch(list,key)  
-
-if result == -1:
-  print('key not found')
+(9)
+def binsearch(lst,key):
+    low=0
+    high=len(lst)-1
+    while low<=high:
+        mid = (low+high)//2
+        if key==lst[mid]:
+            return mid
+        elif key<lst[mid]:
+            high = mid-1
+        else:
+            low = mid+1
+    return -1
+lst = []
+n = int(input("Enter the size of n\n"))
+print("Enter ",n," elements")
+for i in range(n):
+    ele = int(input())
+    lst.append(ele)
+lst.sort()
+print("Sorted list is ",lst)
+key = int(input("Enter the key to be searched "))
+pos = binsearch(lst, key)
+if pos == -1:
+    print("Key not found")
 else:
-  print('key is found in the position',result)
+    print("Key found at position ",pos+1)
+
 
 __________________________________________________________________________________________________________
 
-(10)list =[]
+(10)
+list =[]
 def readele(list):
   count = int(input('enter the size of list '))
   for i in range(count):
@@ -194,7 +184,8 @@ def indexofsmallestelement(list):
 indexofsmallestelement(list)
 __________________________________________________________________________________________________________
 
-(11)myfile = open('sample.txt','r')
+(11)
+myfile = open('sample.txt','r')
 linecount =0
 charcount =0
 count =0
@@ -209,7 +200,7 @@ print('number of lines is', linecount)
 print('number of characters is',charcount)
 print('word is ',count)
 __________________________________________________________________________________________________________
-12>>
+(12)
 filename = input('Enter the filename: ')
 file = open(filename, 'r')
 count = 1
@@ -225,7 +216,7 @@ for line in file:
     print('Average of', count, 'is', average)
 
     count += 1  
-__________________________________________________________________________________________________________
+
 
 
 __________________________________________________________________________________________________________
