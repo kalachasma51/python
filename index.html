@@ -193,37 +193,36 @@ indexofsmallestelement(list)
 __________________________________________________________________________________________________________
 
 (11)
-myfile = open('sample.txt','r')
-linecount =0
-charcount =0
-count =0
+ipfile=input("Enter the filename\n")
+f1=open(ipfile)
+lcount=wcount=ccount=0
+for line in f1:
+     lst=line.split()
+     wcount=wcount+len(lst)
+     for word in lst:
+         ccount=ccount+len(word)
+     lcount=lcount+1
+print("Total lines=",lcount)
+print("Total words=",wcount)
+print("Total characters=",ccount)
 
-for i in myfile:
-  linecount = linecount+1
-  charcount += len(i)
-  wordcount = i.split()
-  count += len(wordcount)
-
-print('number of lines is', linecount)
-print('number of characters is',charcount)
-print('word is ',count)
 __________________________________________________________________________________________________________
 (12)
-filename = input('Enter the filename: ')
-file = open(filename, 'r')
-count = 1
-
-for line in file:
-    llist = line.split()
-    total = 0  
-    for mark in llist:
-        total += int(mark)
-    average = total / len(llist)
-
-    print('Total marks of student', count, 'is', total)
-    print('Average of', count, 'is', average)
-
-    count += 1  
+ipfile=input("Enter the filename\n")
+f1=open(ipfile)
+count=1
+print("---------------------------------")
+for line in f1:
+    lst=line.split()
+    sum=0
+    for mark in lst:
+        sum=sum+int(mark)
+    avg=sum/len(lst)
+    print("Student",count,"marks:")
+    print("Total marks=",sum)
+    print("Avearge=",avg)
+    count+=1
+    print("-------------------------------")
 
 
 
