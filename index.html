@@ -14,6 +14,499 @@
 <body>
     <pre>
 
+1.
+class Account:
+    def __init__(self, accountno):
+        self.accountno = accountno
+        self.balance = 100
+        
+    def deposit(self, amt):  
+        self.balance += amt
+        
+    def withdraw(self, amt):
+        if self.balance - amt >= 100:
+            self.balance -= amt
+            
+def prompt():
+    print("1 New acc 2 withdraw 3 deposit4 highest balance 5 display 6 exit")
+    
+accountholders = []
+
+def getAccountObj(accno):
+    for ele in accountholders:
+        if ele.accountno == accno:
+            return ele
+    return -1
+
+while True:
+    prompt()
+    choice = int(input())
+    
+    if choice == 1:
+        accno = int(input("Enter the account no"))
+        Obj = Account(accno)
+        accountholders.append(Obj)
+    elif choice == 2:
+        accno = int(input("Enter the account no"))
+        Obj = getAccountObj(accno)
+        if Obj == -1:
+            print("Invalid input")
+        else:
+            amount = int(input("Enter the amount"))
+            Obj.withdraw(amount)
+    elif choice == 3:
+        accno = int(input("Enter the account no"))
+        Obj = getAccountObj(accno)
+        if Obj == -1:
+            print("Invalid input")
+        else:
+            amount = int(input("Enter the amount"))
+            Obj.deposit(amount)
+    elif choice == 4:
+        high = 0
+        highacc = ''
+        for ele in accountholders:
+            if ele.balance > high:
+                high = ele.balance
+                highacc = ele.accountno
+        print("The account ", highacc, "has highest balance of:", high)
+    elif choice == 5:
+        accno = int(input("Enter the account no"))
+        Obj = getAccountObj(accno)
+        if Obj == -1:
+            print("Invalid input")
+        else:
+            print("Balance:", Obj.balance)
+    elif choice == 6:
+        break
+
+
+-----------------------------------------------------------------------------------------------
+2.
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+kfname="key.txt"
+afname="mark.txt"
+
+kfile=open(kfname,'r')
+print(kfile)
+anskey=kfile.readline()
+print(anskey)
+anslist=anskey.split()
+print(anslist)
+
+totalscore={}
+
+afile=open(afname,'r')
+for line in afile:
+    alist=line.split()
+    print(alist)
+    sname=alist.pop(0)
+    totalscore[sname]=0
+    idx=0
+    for ele in alist:
+        if(ele==anslist[idx]):
+            totalscore[sname]=totalscore[sname]+1
+            idx=idx+1
+print(totalscore)
+
+maxscore=max(totalscore.values())
+print(maxscore)
+for k,v in totalscore.items():
+    if(maxscore==v):
+        print(k,v)
+        
+data={}
+scorerange=['0-2','3-6','7-10']
+totstudents=[]
+frange=0
+srange=0
+trange=0
+for v in totalscore.values():
+    if(v>=7):
+        trange+=1
+    elif(v>=3 and v<7):
+        srange+=1
+    else:
+        frange+=1
+
+totstudents.append(trange)
+totstudents.append(srange)
+totstudents.append(frange)
+
+data['Score Range']=scorerange
+data['No of Students']=totstudents
+
+df=pd.DataFrame(data)
+df.set_index('Score Range',inplace=True)
+plt.figure(figsize=(8,8))
+df.plot(kind='bar',color='orange')
+plt.title('McQ Analysis')
+plt.xlabel('Score Range')
+plt.ylabel('No of Students')
+plt.show()
+
+
+
+-----------------------------------------------------------------------------
+3.
+class Country:
+    def __init__(self,name,capital,population):
+        self.name=name
+        self.capital=capital
+        self.population=population
+    
+    def display(self):
+        print("Name",self.name)
+        print("Capital",self.capital)
+        print("Population",self.population)
+        
+def prompt():
+    print('ENter 1 for New Country')
+    print("ENter 2 for Display")
+    print("Enter 3 for Highest polulation")
+    print("ENter 4 for exit")
+    
+countrylist=[]
+def getCountryObj(name):
+    for ele in countrylist:
+        if(ele.name==name):
+            return ele
+    return -1
+
+while(True):
+    prompt()
+    choice=int(input())
+    
+    if(choice==1):
+        name=input("Enter the Coountry")
+        cap=input("ENter the capital")
+        pop=int(input("Enter the pop"))
+        Obj=Country(name, cap, pop)
+        countrylist.append(Obj)
+        
+    elif(choice==2):
+        name=input("Enter the Country")
+        Obj=getCountryObj(name)
+        if(Obj==-1):
+            print("Inavlid Country")
+        else:
+            print("The Capital:",Obj.capital,"\n Population:",Obj.population)
+            
+    elif(choice==3):
+        highpop=0
+        highName=""
+        for ele in countrylist:
+            if(ele.population>highpop):
+                highpop=ele.population
+                highName=ele.name
+        print(highName,highpop)
+    
+    elif(choice==4):
+        break
+
+
+---------------------------------------------------------------------
+4.
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df=pd.read_csv("student_cie_see.csv")
+print(df)
+print(len(df))
+
+df['CS301_TOTAL']=df['CS301_CIE']+df['CS301_SEE']
+df['CS302_TOTAL']=df['CS302_CIE']+df['CS302_SEE']
+df['CS303_TOTAL']=df['CS303_CIE']+df['CS303_SEE']
+df['CS304_TOTAL']=df['CS304_CIE']+df['CS304_SEE']
+df['CS305_TOTAL']=df['CS305_CIE']+df['CS305_SEE']
+df['CS306_TOTAL']=df['CS306_CIE']+df['CS306_SEE']
+
+
+subjects={'CS301':0,'CS302':0,'CS303':0,'CS304':0,'CS305':0,'CS306':0}
+
+subjects['CS301']=df['CS301_TOTAL'].sum()/len(df)
+subjects['CS302']=df['CS302_TOTAL'].sum()/len(df)
+subjects['CS303']=df['CS303_TOTAL'].sum()/len(df)
+subjects['CS304']=df['CS304_TOTAL'].sum()/len(df)
+subjects['CS305']=df['CS305_TOTAL'].sum()/len(df)
+subjects['CS306']=df['CS306_TOTAL'].sum()/len(df)
+
+print(df)
+
+maxval=max(subjects.values())
+print(maxval)
+
+for k,v in subjects.items():
+    if(maxval==v):
+        print(k,v)
+
+idx=0
+usnlist=[]
+avgcielist=[]
+avgseelist=[]
+while(idx<len(df)):
+    row=df.loc[idx]
+    print(row)
+    usn=row['USN']
+    usnlist.append(usn)
+    totalcielist=row['CS301_CIE']+row['CS302_CIE']+row['CS303_CIE']+row['CS304_CIE']+row['CS305_CIE']+row['CS306_CIE']
+    totalseelist=row['CS301_SEE']+row['CS302_SEE']+row['CS303_SEE']+row['CS304_SEE']+row['CS305_SEE']+row['CS306_SEE']
+    avgciescore=totalcielist/6 
+    avgseescore=totalseelist/6
+    avgcielist.append(avgciescore)
+    avgseelist.append(avgseescore)
+    idx=idx+1
+    
+    
+data={'USN':usnlist,'AVERAGE CIE':avgcielist,'AVERAGE SEE':avgseelist}
+plotdf=pd.DataFrame(data)
+plotdf.set_index('USN',inplace=True)
+plt.figure(figsize=(8,8))
+plotdf.plot(kind='bar',color=['r','g'])
+plt.title('Student Avergae score')
+plt.show()
+
+=====================================================================================
+5.
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('student_cie_see (1).csv')
+print(df)
+print(len(df))
+#print(df[['CS301_CIE','CS302_CIE']])
+
+df['CS301_TOTAL'] = df['CS301_CIE']+ df['CS301_SEE']
+df['CS302_TOTAL'] = df['CS302_CIE']+ df['CS302_SEE']
+df['CS303_TOTAL'] = df['CS303_CIE']+ df['CS303_SEE']
+df['CS304_TOTAL'] = df['CS304_CIE']+ df['CS304_SEE']
+df['CS305_TOTAL'] = df['CS305_CIE']+ df['CS305_SEE']
+df['CS306_TOTAL'] = df['CS306_CIE']+ df['CS306_SEE']
+
+idx = 0
+df['CS301_GRADE'] = ''
+df['CS302_GRADE'] = ''
+df['CS303_GRADE'] = ''
+df['CS304_GRADE'] = ''
+df['CS305_GRADE'] = ''
+df['CS306_GRADE'] = ''
+while (idx < len(df)):
+    row = df.loc[idx]
+    if(row['CS301_TOTAL'] > 90):
+        df.loc[[idx],['CS301_GRADE']] = 'S'
+    elif(row['CS301_TOTAL'] > 80 and row['CS301_TOTAL'] < 90):
+        df.loc[[idx],['CS301_GRADE']] = 'A'
+    elif(row['CS301_TOTAL'] < 40):
+        df.loc[[idx],['CS301_GRADE']] = 'F'
+    if(row['CS302_TOTAL'] > 90):
+        df.loc[[idx],['CS302_GRADE']] = 'S'
+    elif(row['CS302_TOTAL'] > 80 and row['CS302_TOTAL'] < 90):
+        df.loc[[idx],['CS302_GRADE']] = 'A'
+    elif(row['CS302_TOTAL'] < 40):
+        df.loc[[idx],['CS302_GRADE']] = 'F'
+    if(row['CS303_TOTAL'] > 90):
+        df.loc[[idx],['CS303_GRADE']] = 'S'
+    elif(row['CS303_TOTAL'] > 80 and row['CS303_TOTAL'] < 90):
+        df.loc[[idx],['CS303_GRADE']] = 'A'
+    elif(row['CS303_TOTAL'] < 40):
+        df.loc[[idx],['CS303_GRADE']] = 'F'
+    if(row['CS304_TOTAL'] > 90):
+        df.loc[[idx],['CS301_GRADE']] = 'S'
+    elif(row['CS301_TOTAL'] > 80 and row['CS301_TOTAL'] < 90):
+        df.loc[[idx],['CS304_GRADE']] = 'A'
+    elif(row['CS304_TOTAL'] < 40):
+        df.loc[[idx],['CS304_GRADE']] = 'F'
+    if(row['CS305_TOTAL'] > 90):
+        df.loc[[idx],['CS305_GRADE']] = 'S'
+    elif(row['CS305_TOTAL'] > 80 and row['CS305_TOTAL'] < 90):
+        df.loc[[idx],['CS305_GRADE']] = 'A'
+    elif(row['CS305_TOTAL'] < 40):
+        df.loc[[idx],['CS305_GRADE']] = 'F'
+    if(row['CS306_TOTAL'] > 90):
+        df.loc[[idx],['CS306_GRADE']] = 'S'
+    elif(row['CS306_TOTAL'] > 80 and row['CS306_TOTAL'] < 90):
+        df.loc[[idx],['CS306_GRADE']] = 'A'
+    elif(row['CS306_TOTAL'] < 40):
+        df.loc[[idx],['CS306_GRADE']] = 'F'
+    idx = idx + 1
+
+subjlist = ['CS301','CS302','CS303','CS304','CS305','CS306']
+scountlist = []
+acountlist = []
+fcountlist = []
+
+for course in subjlist:
+    gcol = course + '_GRADE'
+    scount = list(df[gcol]).count('S')
+    acount = list(df[gcol]).count('A')
+    fcount = list(df[gcol]).count('F')
+    scountlist.append(scount)
+    acountlist.append(acount)
+    fcountlist.append(fcount)
+   
+df['TOTAL']=df['CS301_TOTAL'] + df['CS302_TOTAL'] +df['CS303_TOTAL'] +df['CS304_TOTAL'] +df['CS305_TOTAL'] +df['CS306_TOTAL']
+ 
+highstudent =''
+highscore = 0
+idx1=0
+while(idx1 < len(df)):
+    row=df.loc[idx1]
+    if row['TOTAL']>highscore:
+        highscore=row['TOTAL']
+        highstudent=row['USN']
+    idx1=idx1+1
+       
+print('The course',highstudent,' highest score is',highscore)
+
+data = {'Courses':subjlist,'S Grade':scountlist,'A grade': acountlist,'F Grade': acountlist}
+   
+plotdf = pd.DataFrame(data)
+plt.figure(figsize = (16,16))
+plotdf.set_index('Courses', inplace = True)
+plotdf.plot(kind = 'bar',rot = 45, color =['r','g','b'])
+plt.title('Grade Available',fontweight ='bold',fontsize=30)
+plt.ylabel("No Of Students",fontweight ='bold')
+plt.show()
+
+
+==============================================================================================
+6.
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv('placement.csv')
+df.set_index('Branch', inplace=True)
+br_total = df.sum(axis=1)
+print(br_total)
+
+max_br_total = max(br_total)
+for k, v in br_total.items():
+    if v == max_br_total:
+        print(k, v)
+
+comp_total = df.sum(axis=0)
+print(comp_total)
+
+max_comp_total = max(comp_total)
+for k, v in comp_total.items():
+    if v == max_comp_total:
+        print(k, v)
+
+blist = list(br_total.keys())
+br_tot_list = list(br_total)
+print(blist)
+print(br_tot_list)
+
+plot_data = {'Branches': blist, 'Total': br_tot_list}
+plot_df = pd.DataFrame(plot_data)
+plot_df.set_index('Branches', inplace=True)
+plt.figure(figsize=(8, 6))
+plot_df.plot(kind='pie', subplots=True)
+plt.title('Branch-wise Analysis', fontsize='20')
+plt.show()
+
+clist = list(comp_total.keys())
+c_tot_list = list(comp_total)
+plot_data = {'Companies': clist, 'Total': c_tot_list}
+plot_df = pd.DataFrame(plot_data)
+plot_df.set_index('Companies', inplace=True)
+plt.figure(figsize=(8, 6))
+plot_df.plot(kind='pie', subplots=True, legend=False)
+plt.title("Company-wise Analysis")
+plt.show()
+
+
+
+
+
+
+
+=============================================="+++++++++++++++++++++++++++++++++++++++=====================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (1) import random
 rno=random.randint(1, 10)
 while True:
