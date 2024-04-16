@@ -13,7 +13,295 @@
     </style>
 <body>
     <pre>
+=========================================================================================+
 
+13.
+class Account:
+   def __init__(self, number):
+       self.__number = number
+       self.__balance = 100
+ 
+   def deposit(self, amount):
+       self.__balance += amount
+       print("Account Balance is:", self.__balance)
+ 
+   def withdraw(self, amount):
+       if self.__balance - amount < 100:
+           print("Low balance for withdrawal")
+       else:
+           self.__balance -= amount
+           print("Account Balance is:", self.__balance)
+ 
+   def get_balance(self):
+       return self.__balance
+ 
+acclist = []
+acc_no_list = []
+ 
+while True:
+   print("\nEnter")
+   print("1: Account creation\n2: Deposit\n3: Withdraw")
+   print("4: Get highest balance\n5: Exit")
+   choice = int(input("Enter the choice: "))
+ 
+   if choice == 1:
+       number = int(input("Enter the account number: "))
+       if number in acc_no_list:
+           print("Account already exists")
+       else:
+           new = Account(number)
+           acclist.append(new)
+           acc_no_list.append(number)
+   elif choice == 2:
+       number = int(input("Enter the account number: "))
+       if number in acc_no_list:
+           amount = float(input("Enter the amount for deposit: "))
+           index = acc_no_list.index(number)
+           acclist[index].deposit(amount)
+       else:
+           print("Account not found")
+   elif choice == 3:
+       number = int(input("Enter the account number: "))
+       if number in acc_no_list:
+           amount = float(input("Enter the amount for withdrawal: "))
+           index = acc_no_list.index(number)
+           acclist[index].withdraw(amount)
+       else:
+           print("Account not found")
+   elif choice == 4:
+       bal_list = [account.get_balance() for account in acclist]
+       if len(bal_list) == 0:
+           print("No account exists")
+       else:
+           highest_balance = max(bal_list)
+           index = bal_list.index(highest_balance)
+           print("Highest balance value:", highest_balance)
+           print("Account number is:", acc_no_list[index])
+   else:
+       break
+           ------------------------------------------------------------------------------------------
+14.
+import matplotlib.pyplot as plt
+ 
+with open("keys.txt") as f1:
+   line = f1.readline()
+   key = line.split()
+ 
+with open("marks1.txt") as f1:
+   mark = []
+   name = []
+   for line in f1:
+       ans = line.split()
+       total = 0
+       for i in range(1, len(ans)):
+           if ans[i] == key[i - 1]:
+               total += 1
+       mark.append(total)
+       name.append(ans[0])
+ 
+high = max(mark)
+index = mark.index(high)
+print("Top Score:", high)
+print("Top Scorer:", name[index])
+ 
+r1 = r2 = r3 = 0
+for value in mark:
+   if value >= 0 and value <= 2:
+       r1 += 1
+   elif value >= 3 and value <= 6:
+       r2 += 1
+   else:
+       r3 += 1
+ 
+x = ["0-2", "3-6", "7-10"]
+y = [r1, r2, r3]
+w = 0.1
+plt.bar(x, y, width=w, color=['r', 'g', 'b'])
+plt.title("Students Performance in MCQ")
+plt.xlabel("Score Range")
+plt.ylabel("No.of Students")
+plt.show()
+------------------------------------------------------------------------------------------
+15.
+class Country:
+   def __init__(self, name, capital, population):
+       self.__name = name
+       self.__capital = capital
+       self.__population = population
+ 
+   def display(self):
+       print("Capital:", self.__capital)
+       print("Population: ", self.__population)
+ 
+clist = []
+cname = []
+plist = []
+ 
+while True:
+   print("\nEnter")
+   print("1:Enter Details\n2:Get Capital")
+   print("3:Highest population\n4:Exit\n")
+   choice = int(input("Enter your choice: "))
+ 
+   if choice == 1:
+       name = input("Enter the country name: ")
+       if name in cname:
+           print("Country already exists")
+       else:
+           capital = input("Enter the capital: ")
+           population = int(input("Enter the population: "))
+           new = Country(name, capital, population)
+           clist.append(new)
+           cname.append(name)
+           plist.append(population)
+   elif choice == 2:
+       name = input("Enter the country name: ")
+       if name in cname:
+           print("Details:")
+           index = cname.index(name)
+           clist[index].display()
+       else:
+           print("Country info does not exist\n")
+   elif choice == 3:
+       if len(plist) == 0:
+           print("No data exist")
+       else:
+           high = max(plist)
+           index = plist.index(high)
+           print("Highest population is:", high)
+           print("Country name is:", cname[index])
+   else:
+       break
+------------------------------------------------------------------------------------------
+16.
+import pandas as pd
+import matplotlib.pyplot as plt
+ 
+df1 = pd.read_csv("semcie.csv")
+ 
+avgsrs = pd.Series()
+ 
+for i in range(1, len(df1.columns), 2):
+   code = df1.columns[i][:5]
+   avg = (df1.iloc[:, i].mean(0) + df1.iloc[:, i + 1].mean(0)) / 2
+   avgsrs[code] = avg
+ 
+print("Highest average=", avgsrs.max())
+print("Subject code with highest average=", avgsrs.idxmax())
+ 
+avgcie = df1.iloc[:, 1::2].mean(1)
+avgsee = df1.iloc[:, 2::2].mean(1)
+ 
+x1 = []
+x2 = []
+ticks = []
+w = 0.2
+ 
+usn = df1['USN']
+for i in range(len(usn)):
+   x1.append(i)
+   x2.append(i + w)
+   ticks.append(i + w / 2)
+ 
+plt.figure(figsize=(10, 5))
+plt.bar(x1, avgcie, width=w, color='r', label="CIE")
+plt.bar(x2, avgsee, width=w, color='g', label="SEE")
+plt.xticks(ticks, usn)
+plt.xlabel("Student USNs")
+plt.ylabel("CIE vs SEE score")
+plt.title("Student performance Average CIE vs SEE")
+plt.legend()
+plt.show()
+
+------------------------------------------------------------------------------------------
+17.
+import pandas as pd
+import matplotlib.pyplot as plt
+ 
+df1 = pd.read_csv("semcie.csv")
+ 
+total = df1.iloc[:, 1:].sum(1)
+maxmark = total.max()
+maxidx = total.idxmax()
+ 
+print("Highest marks=", maxmark)
+print("Student USN with highest marks=", df1.iloc[maxidx, 0])
+ 
+Sgrade = pd.Series()
+Agrade = pd.Series()
+Fgrade = pd.Series()
+ 
+for i in range(1, len(df1.columns), 2):
+   code = df1.columns[i][:5]
+   total = df1.iloc[:, [i, i + 1]].sum(1)
+ 
+   Scount = Acount = Fcount = 0
+   for mark in total:
+       if mark >= 90:
+           Scount += 1
+       elif mark >= 80 and mark < 90:
+           Acount += 1
+       elif mark < 40:
+           Fcount += 1
+   Sgrade[code] = Scount
+   Agrade[code] = Acount
+   Fgrade[code] = Fcount
+ 
+x1 = []
+x2 = []
+x3 = []
+ticks = []
+w = 0.2
+subcode = Sgrade.index
+ 
+for i in range(len(subcode)):
+   x1.append(i)
+   x2.append(i + w)
+   x3.append(i + 2 * w)
+   ticks.append(i + w)
+ 
+plt.figure(figsize=(10, 7))
+plt.bar(x1, Sgrade, width=w, color='r', label="Sgrade")
+plt.bar(x2, Agrade, width=w, color='g', label="Agrade")
+plt.bar(x3, Fgrade, width=w, color='b', label="Fgrade")
+plt.xticks(ticks, subcode)
+plt.xlabel("Courses")
+plt.ylabel("No of Students")
+plt.title("Course Grade Analysis")
+plt.legend()
+plt.show()
+18.
+import pandas as pd
+import matplotlib.pyplot as plt
+ 
+df1 = pd.read_csv("placement.csv")
+ 
+branch_total = df1.iloc[:, 1:].sum(1)
+branch_max = branch_total.max()
+max_idx = branch_total.idxmax()
+print("Highest placement branchwise=", branch_max)
+print("Branch name=", df1.iloc[max_idx, 0])
+ 
+comp_total = df1.iloc[:, 1:].sum(0)
+print("Highest Placement companywise", comp_total.max())
+print("Company name=", comp_total.idxmax())
+ 
+branch = df1['Branch']
+number = df1.iloc[:, 1:].max(1)
+company = df1.iloc[:, 1:].idxmax(1)
+df2 = pd.DataFrame(data={'Branch': branch, 'Company': company, 'Number': number})
+print(df2)
+ 
+plt.figure(figsize=(6, 6))
+plt.pie(branch_total, labels=branch)
+plt.show()
+ 
+plt.figure(figsize=(6, 6))
+plt.pie(comp_total, labels=df1.columns[1:], rotatelabels=True)
+plt.show()
+ 
+
+===============================================================================================
 1.
 class Account:
     def __init__(self, accountno):
