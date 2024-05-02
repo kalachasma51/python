@@ -13,6 +13,221 @@
     </style>
 <body>
     <pre>
+
+
+(1) import random
+rno=random.randint(1, 10)
+while True:
+    guessno=int(input("ENTER GUESSS NO:"))
+    if guessno==rno:
+        print("congooo!!")
+        break
+    elif guessno>rno:
+       print('your guess number is greater than computer generated number choose a lower guess')
+    else:
+       print('your guess number is lower than computer generated number guess a higher number')
+print("game over")
+
+__________________________________________________________________________________________________________
+(2)
+lst1=[]
+lst2=[]
+def read(list):
+    n=int(input("size:"))
+    for i in range(n):
+        value=int(input("enter value:"))
+        list.append(value)
+read(lst1)
+read(lst2)
+
+def symmetry(list):
+       ec=0
+       oc=0
+       for i in list:
+           if i%2==0:
+               ec+=1
+           else:
+               oc+=1
+       return ec,oc
+e1,o1=symmetry(lst1)
+e2,o2=symmetry(lst2)
+
+if (e1==e2 and o1==o2):
+    print("symm")
+else:
+    print("not symm")
+                   
+
+__________________________________________________________________________________________________________
+(3)
+def fib(n):
+    fibi=[0,1]
+    for i in range(n):
+        nextval=fibi[-1]+fibi[-2]
+        fibi.append(nextval)
+    return fibi[:n]
+
+
+n=int(input("SIZE:"))
+print("fib series:",fib(n))
+__________________________________________________________________________________________________________
+(4)
+stud = {'john':86.5,'jack':91.2,'jill':84.5,'harry':72,'joe':80.5}
+
+total = sum(stud.values())
+print('total marks of all students is',total)
+average = total / len(stud)
+print('average is',average)
+
+sortedlist = sorted(stud,key = stud.get,reverse=True)
+
+count =0
+for i in sortedlist:
+  print('top scorer' ,i , ': ', stud[i])
+  if(count==2):
+    break
+  count +=1
+__________________________________________________________________________________________________________
+(5)
+str=input("ENTER STRING:")
+c=0
+for i in range(len(str)):
+    if str[i].isupper():
+        c+=1
+        print("cap letter",str[i],"is at position",i+1)
+print("CAP COUNT:",c)
+__________________________________________________________________________________________________________
+(6)
+str = input('enter a string')
+
+str = str.lower();
+acount = str.count('a')
+ecount = str.count('e')
+icount = str.count('i')
+ocount = str.count('o')
+ucount = str.count('u')
+
+print('number of a in the string :',acount)
+print('number of e in the string :',ecount)
+print('number of i in the string :',icount)
+print('number of o in the string :',ocount)
+print('number of u in the string :',ucount)
+__________________________________________________________________________________________________________
+(7)
+str=input("enetr str:")
+pattern  ='’!()-[]{};:’’’,\,<>,/,?,@,#,$,%^&*_~'
+op=''
+
+for i in str:
+    if i not in pattern:
+        op=op+i
+print(op)
+__________________________________________________________________________________________
+(8)
+str1 = input('enter the string1')
+str2 = input('enter string 2')
+stri =''
+strj =''
+
+for i in str1:
+  if i.isupper():
+    stri = stri + i
+
+
+for i in str2:
+  if i.isupper():
+    strj = strj + i
+
+
+print('output is', stri+strj)
+__________________________________________________________________________________________________________
+
+(9)
+def binsearch(lst,key):
+    low=0
+    high=len(lst)-1
+    while low < = high:
+        mid = (low+high)//2
+        if key = = lst[mid] :
+            return mid
+        elif key < lst[ mid ] :
+            high = mid - 1
+        else :
+            low = mid + 1
+    return - 1
+lst = [ ]
+n = int ( input ("Enter the size of n\n"))
+print("Enter ",n," elements")
+for i in range(n):
+    ele = int(input())
+    lst.append(ele)
+lst.sort()
+print("Sorted list is ",lst)
+key = int(input("Enter the key to be searched "))
+pos = binsearch(lst, key)
+if pos == -1:
+    print("Key not found")
+else:
+    print("Key found at position ",pos+1)
+
+
+__________________________________________________________________________________________________________
+
+(10)
+list =[]
+def readele(list):
+  count = int(input('enter the size of list '))
+  for i in range(count):
+    val = int(input('enter the element into the list '))
+    list.append(val)
+
+readele(list)
+
+def indexofsmallestelement(list):
+  mini = min(list)
+  index = list.index(mini)
+  print('minimum element is',mini)
+  print('position of minimum ele is',index)
+
+
+indexofsmallestelement(list)
+__________________________________________________________________________________________________________
+
+(11)
+ipfile=input("Enter the filename\n")
+f1=open(ipfile)
+lcount=wcount=ccount=0
+for line in f1:
+     lst=line.split()
+     wcount=wcount+len(lst)
+     for word in lst:
+         ccount=ccount+len(word)
+     lcount=lcount+1
+print("Total lines=",lcount)
+print("Total words=",wcount)
+print("Total characters=",ccount)
+
+__________________________________________________________________________________________________________
+(12)
+ipfile=input("Enter the filename\n")
+f1=open(ipfile)
+count=1
+print("---------------------------------")
+for line in f1:
+    lst=line.split()
+    sum=0
+    for mark in lst:
+        sum=sum+int(mark)
+    avg=sum/len(lst)
+    print("Student",count,"marks:")
+    print("Total marks=",sum)
+    print("Avearge=",avg)
+    count+=1
+    print("-------------------------------")
+
+
+
+__________________________________________________________________________________________________________
 =========================================================================================+
 
 13.
