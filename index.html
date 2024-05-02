@@ -226,6 +226,470 @@ for line in f1:
     print("-------------------------------")
 
 
+=======================================================================================================
+13) Design a class named Account that contains: A private int data field named accountno for the account. A private float data field named balance for the account. A constructor that creates an account with the specified accountno and Initial balance (default 100). A method named withdraws that withdraws a specified amount from the account. A minimum balance of 100 should be maintained for each account. A method named deposit that deposits a specified amount to the specific account. 
+Write a program that maintains ‘n’ number of Account objects with unique accountno and supports following operations.
+ a) New account creation 
+ b) deposit operation for a given account no
+ c) withdraw operation for a given account no 
+ d) Display account no with highest balance
+code:
+
+class Account:
+    def __init__(self,number):
+        self.__number=number
+        self.__balance=100
+    def deposit(self,amount):
+        self.__balance+=amount
+        print("Account Balance is:",self.__balance)
+    def withdraw(self,amount):
+        if self.__balance-amount<100:
+            print("Low balance for withdrawal")
+        else:
+            self.__balance-=amount
+            print("Account Balance is:",self.__balance)
+    def getbalance(self):
+        return self.__balance
+acclist=[]
+accnolist=[]
+while True:
+    print("\nEnter")
+    print("1:Account creation\n2:Deposit\n3:Withdraw")
+    print("4:Get highest balance\n5:Exit")
+    choice=int(input("Enter the choice: "))
+    if choice==1:
+        number=int(input("Enter the account number: "))
+        if number in accnolist:
+            print("Account already exists")
+        else:
+              new=Account(number)
+              acclist.append(new)
+              accnolist.append(number)
+    elif choice==2:
+        number=int(input("Enter the account number: "))
+        if number in accnolist:
+            amount=float(input("Enter the amount for deposit: "))
+            index=accnolist.index(number)
+            acclist[index].deposit(amount)
+        else:
+            print("Account not found")
+    elif choice==3:
+       number=int(input("Enter the account number: "))
+       if number in accnolist:
+           amount=float(input("Enter the amount for withdrawal: "))
+           index=accnolist.index(number)
+           acclist[index].withdraw(amount)
+       else:
+           print("Account not found")
+    elif choice==4:
+        ballist=[]
+        for object in acclist:
+            ballist.append(object.getbalance())
+        if len(ballist)==0:
+            print("No account exists")
+        else:
+            high=max(ballist)
+            index=ballist.index(high)
+            print("Highest balance value:",high)
+            print("Account number is:",accnolist[index])
+    else:
+        break
+
+Output :
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 1
+Enter the account number: 123
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 4
+Highest balance value: 100
+Account number is: 123
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 2
+Enter the account number: 123
+Enter the amount for deposit: 1000
+Account Balance is: 1100.0
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 3
+Enter the account number: 123
+Enter the amount for withdrawal: 500
+Account Balance is: 600.0
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 4
+Highest balance value: 600.0
+Account number is: 123
+
+Enter
+1:Account creation
+2:Deposit
+3:Withdraw
+4:Get highest balance
+5:Exit
+Enter the choice: 5
+__________________________________________________________________________________________________________
+
+
+
+
+
+14) Write a program to create a list to maintain country names, respective capital and its population. The program should support following operations 
+a) To enter country name, capital and its population.
+ b) To accept the name of a country as an input and print the corresponding capital name and population as output. Otherwise, the program should print an appropriate message if the country is not found in the list. 
+c) To display the country name with highest population
+
+code:
+class Country:
+    def __init__(self,name,capital,population):
+        self.__name=name
+        self.__capital=capital
+        self.__population=population
+    def display(self):
+        print("Capital:",self.__capital)
+        print("Population: ",self.__population)
+clist=[]
+cname=[]
+plist=[]
+while True:
+    print("\nEnter")
+    print("1:Enter Details\n2:Get Capital")
+    print("3:Highest population\n4:Exit\n")
+    choice=int(input("Enter your choice: "))
+   
+    if choice==1:
+        name=input("Enter the country name: ")
+        if name in cname:
+            print("Country already exists")
+        else:
+            capital=input("Enter the capital: ")
+            population=int(input("Enter the population: "))
+            new=Country(name,capital,population)
+            clist.append(new)
+            cname.append(name)
+            plist.append(population)
+    elif choice==2:
+        name=input("Enter the country name: ")
+        if name in cname:
+            print("Details:")
+            index=cname.index(name)
+            clist[index].display()
+        else:
+            print("Country info does not exist\n")
+    elif choice==3:
+        if len(plist)==0:
+            print("No data exist")
+        else:
+            high=max(plist)
+            index=plist.index(high)
+            print("Highest population is:",high)
+            print("Country name is:",cname[index])
+    else:
+        break
+Output:
+Enter
+1:Enter Details
+2:Get Capital
+3:Highest population
+4:Exit
+
+Enter your choice: 1
+Enter the country name: USA
+Enter the capital: Washington D.C.
+Enter the population: 331000000
+
+Enter
+1:Enter Details
+2:Get Capital
+3:Highest population
+4:Exit
+
+Enter your choice: 1
+Enter the country name: China
+Enter the capital: Beijing
+Enter the population: 1444000000
+
+Enter
+1:Enter Details
+2:Get Capital
+3:Highest population
+4:Exit
+
+Enter your choice: 2
+Enter the country name: USA
+Details:
+Capital: Washington D.C.
+Population:  331000000
+
+Enter
+1:Enter Details
+2:Get Capital
+3:Highest population
+4:Exit
+
+Enter your choice: 3
+Highest population is: 1444000000
+Country name is: China
+
+Enter
+1:Enter Details
+2:Get Capital
+3:Highest population
+4:Exit
+
+Enter your choice: 4
+
+__________________________________________________________________________________________________________
+
+  
+
+
+
+
+
+15)
+ 
+
+import matplotlib.pyplot as plt
+
+f1=open("keys.txt")
+line=f1.readline()
+key=line.split()
+f1.close()
+
+f1=open("marks1.txt")
+mark=[]
+name=[]
+print("Total marks of each student is")
+for line in f1:
+    ans=line.split()
+    total=0
+    for i in range(1,len(ans)):
+        if ans[i]==key[i-1]:
+            total+=1
+    print(ans[0],total)
+    mark.append(total)
+    name.append(ans[0])
+high=max(mark)
+index=mark.index(high)
+print("Top Score:",high)
+print("Top Scorer:",name[index])
+
+#Computing the range
+r1=r2=r3=0
+for value in mark:
+    if value>=0 and value<=2:
+        r1+=1
+    elif value>=3 and value<=6:
+        r2+=1
+    else:
+        r3+=1
+#plot the graph
+x=["0-2","3-6","7-10"]
+y=[r1,r2,r3]
+w=0.1
+plt.bar(x,y,width=w,color=['r','g','b'])
+plt.title("Students Performance in MCQ")
+plt.xlabel("Score Range")
+plt.ylabel("No.of Students")
+plt.show()
+
+
+OUTPUT:
+ 
+Total marks of each student is
+Student0 7
+Student1 10
+Student2 5
+Student3 3
+Student4 8
+Student5 7
+Student6 7
+Student7 7
+Student8 2
+Student9 5
+Top Score: 10
+Top Scorer: Student1
+
+
+
+__________________________________________________________________________________________________________
+16.
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load the student data from CSV
+df = pd.read_csv('student.csv')
+
+# Calculate average scores for each subject
+avgsrs = {}
+for i in range(1, len(df.columns), 2):
+    code = df.columns[i][:5]
+    avg_score = (df.iloc[:, i].mean() + df.iloc[:, i + 1].mean()) / 2
+    avgsrs[code] = avg_score
+
+# Find the subject code with the highest average
+highest_avg_subject = max(avgsrs, key=avgsrs.get)
+highest_avg_score = avgsrs[highest_avg_subject]
+
+print("Subject code with highest average =", highest_avg_subject)
+print("Highest average score =", highest_avg_score)
+
+# Calculate average CIE and SEE scores for each student
+avg_cie = df.iloc[:, 1::2].mean(axis=1)
+avg_see = df.iloc[:, 2::2].mean(axis=1)
+
+# Prepare data for plotting
+x = range(len(df.index))
+w = 0.4
+
+# Plot the bar chart
+plt.bar(x, avg_cie, width=w, color='r', label="CIE")
+plt.bar([i + w for i in x], avg_see, width=w, color='g', label="SEE")
+plt.xticks([i + w/2 for i in x], df['USN'], rotation=45)
+plt.legend()
+plt.title("Student Performance: Avg CIE vs Avg SEE")
+plt.xlabel("Student USN's")
+plt.ylabel("CIE vs SEE Score")
+plt.tight_layout()
+plt.show()
+__________________________________________________________________________________________________________
+
+17)CIE and SEE marks of Ten students for 3rd semester is stored in a CSV file. Marks details are stored in a worksheet and the format of marks details is shown below. The worksheet provides CIE and SEE marks for the courses CS301 TO CS306. Perform data analysis using numpy, pandas, matplotlib python libraries for the following scenarios. 
+a) Display the subject code with highest avg score in the semester 
+b) Visualize each student’s avg CIE and avg SEE for 3 rd sem using a bar chart graph.
+import pandas as pd
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df1=pd.read_csv("semcie.csv")
+
+avgsrs=pd.Series()                               #initially empty
+
+for i in range(1,len(df1.columns),2):
+    code=df1.columns[i][:5]                      #to get the sub code without CIE letters
+    avg=(df1.iloc[::,i].mean(0)+df1.iloc[::,i+1].mean(0))/2
+    avgsrs[code]=avg                              #stores in series the sub code and its avg
+print("Highest average=",avgsrs.max())
+print("Subject code with highest average=",avgsrs.idxmax())
+
+
+avgcie=df1.iloc[::,1::2].mean(1)
+avgsee=df1.iloc[::,2::2].mean(1)
+
+#plotting operation
+x1=[]     #ticker values for red bars
+x2=[]     #ticker values for green bars
+ticks=[]  #ticker marks for labels
+w=0.2
+
+usn=df1['USN']
+for i in range(len(usn)):
+    x1.append(i)
+    x2.append(i+w)
+    ticks.append(i+w/2)
+plt.figure(figsize=(10,5))    #to set the graph size to prevent overlapping(width,height)
+plt.bar(x1,avgcie,width=w,color='r',label="CIE")
+plt.bar(x2,avgsee,width=w,color='g',label="SEE")
+plt.xticks(ticks,usn)        #to add usn label on x axis
+plt.xlabel("Student USNs")
+plt.ylabel("CIE vs SEE score")
+plt.title("Student performance Average CIE vs SEE")
+plt.legend()
+plt.show()
+
+
+
+ouput:
+Highest average= 38.95
+Subject code with highest average= CS301
+ 
+__________________________________________________________________________________________________________
+18)Placement data distribution across various branches and companies is shown in the table below for the academic year 2020.Perform data analysis using numpy, pandas, matplotlib python libraries for the following scenarios. 
+a) Display the branch name with highest no of total placements across all the companies. 
+b) Display the company name with highest no of total placements across all the branches. 
+c) Display branch name and company name having highest no of placements.(e.g,’CSE’-‘DXC’) 
+d) Draw a pie chart showing distribution of total placements across all the branches.
+ e) Draw a pie chart showing distribution of total placements across all the companies.
+
+Code:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df1=pd.read_csv("placement.csv")
+
+branchtotal=df1.iloc[::,1::].sum(1)   #sum is horizontally
+branchmax=branchtotal.max()
+maxidx=branchtotal.idxmax()
+print("Highest placement branchwise=",branchmax)
+print("Branch name=",df1.iloc[maxidx,0])
+
+comptotal=df1.iloc[::,1::].sum(0)    #sum is performed vertically
+print("Highest Placement companywise",comptotal.max())
+print("Company name=",comptotal.idxmax())
+
+branch=df1['Branch']   #to get branch name in Branch column
+number=df1.iloc[::,1::].max(1)  #max no of placement in branch
+company=df1.iloc[::,1::].idxmax(1) #get company names for number which is index
+df2=pd.DataFrame(data={'Branch':branch,'Company':company,'Number':number})
+print(df2)
+
+#plotting pie chart
+
+plt.figure(figsize=(6,6))
+plt.pie(branchtotal,labels=branch)
+plt.show()
+
+
+plt.figure(figsize=(6,6))
+plt.pie(comptotal,labels=df1.columns[1:],rotatelabels=True)
+plt.show()
+
+
+output:
+
+Highest placement branchwise= 279.0
+Branch name= CSE
+Highest Placement companywise 137.0
+Company name= DXC
+  Branch        Company 		 Number
+0  Civil            	DXC               2.0
+1  Mech.  	Infosys (CRP)    	15.0
+2    E&E       TCS Ninja     		9.0
+3    E&C      Capgemini   		39.0
+4    CSE        DXC    		76.0
+5    ISE        Mindtree   		39.0
+6     BT       Infosys (CRP)     	4.0
+7    MCA    Capgemini     	9.0
 
 __________________________________________________________________________________________________________
 =========================================================================================+
@@ -517,6 +981,7 @@ plt.figure(figsize=(6, 6))
 plt.pie(comp_total, labels=df1.columns[1:], rotatelabels=True)
 plt.show()
  
+=======================================================================
 
 ===============================================================================================
 1.
